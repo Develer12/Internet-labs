@@ -1,0 +1,7 @@
+.idea/
+.build/
+.dist/
+.out/
+global-groovy.log
+soapui.log
+soapui-errors.log
