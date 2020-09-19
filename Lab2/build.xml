@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<project name="Lab2" default="war">
+
+    <path id="compile.classpath">
+        <fileset dir="src">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="init">
+        <mkdir dir="build/classes" />
+        <mkdir dir="WEB-INF/static" />
+        <mkdir dir="WEB-INF/lib" />
+        <copy file="web/index.html" todir="WEB-INF/static" />
+        <property name="server" value="C:\Program Files\Apache Software Foundation\Tomcat 9.0" />
+    </target>
+
+    <target name="compile" depends="init" >
+        <javac destdir="build\classes" debug="true" srcdir="src"
+               classpath = "${server}\lib\servlet-api.jar"/>
+    </target>
+
+    <target name="war" depends="compile">
+        <war destfile="dist/Lab2.war" webxml="web/WEB-INF/web.xml">
+            <lib dir="WEB-INF/lib"/>
+            <classes dir="build/classes"/>
+            <fileset dir="WEB-INF/static" />
+        </war>
+    </target>
+</project>
