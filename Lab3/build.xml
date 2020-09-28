@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<project name="Lab3" default="war">
+ 
+    <path id="compile.classpath">
+        <fileset dir="../Lab3/src">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+     
+    <target name="init">
+        <mkdir dir="../Lab3/build/classes"/>
+        <mkdir dir="../Lab3/WEB-INF/static" />
+        <mkdir dir="../Lab3/WEB-INF/lib" />
+        <copy file="../Lab3/web/index.html" todir="../Lab3/WEB-INF/static" />
+        <copy file="../Lab3/web/error.html" todir="../Lab3/WEB-INF/static" />
+        <copy file="../Lab3/web/redirect.html" todir="../Lab3/WEB-INF/static" />
+        <property name="server" value="C:\Program Files\Apache Software Foundation\Tomcat 8.5" />
+    </target>
+     
+    <target name="compile" depends="init" >
+        <javac destdir="../Lab3/build/classes" debug="true" srcdir="src">
+            <classpath>
+                <fileset file= "${server}\lib\servlet-api.jar" />
+                <fileset file= "../Lab3/web/lib/commons-httpclient-3.1.jar" />
+            </classpath>
+        </javac>
+    </target>
+     
+    <target name="war" depends="compile">
+        <war destfile="${server}/webapps/Lab3.war" webxml="../Lab3/web/WEB-INF/web.xml">
+            <lib dir="../Lab3/WEB-INF/lib"/>
+            <classes dir="../Lab3/build/classes"/>
+            <fileset dir="../Lab3/WEB-INF/static" />
+        </war>
+    </target>
+</project>
