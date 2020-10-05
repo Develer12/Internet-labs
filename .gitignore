@@ -1,7 +1,7 @@
 .idea/
-.build/
+build/
 .dist/
-.out/
+out/
 global-groovy.log
 soapui.log
 soapui-errors.log
